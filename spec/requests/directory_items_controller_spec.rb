@@ -245,6 +245,9 @@ RSpec.describe DirectoryItemsController do
       expect(items.length).to eq(3)
       expect(json["meta"]["total_rows_directory_items"]).to eq(3)
 
+      names = items.map { |item| item["user"]["username"] }
+      expect(names).to eq(names.sort)
+
       user_fields.each do |data|
         user = items[data[:order]]["user"]
         expect(user["username"]).to eq(data[:user].username)
