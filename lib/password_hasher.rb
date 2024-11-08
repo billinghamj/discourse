@@ -7,7 +7,7 @@ class PasswordHasher
   class UnsupportedAlgorithmError < StandardError
   end
 
-  HANDLERS = {}
+  HANDLERS = {}.freeze
 
   def self.register_handler(id, &blk)
     HANDLERS[id] = blk

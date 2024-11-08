@@ -203,7 +203,7 @@ module Chat
       upload-protocol
       watched-words
       chat-html-inline
-    ]
+    ].freeze
 
     MARKDOWN_IT_RULES = %w[
       autolink
@@ -220,7 +220,7 @@ module Chat
       blockquote
       emphasis
       replacements
-    ]
+    ].freeze
 
     def self.cook(message, opts = {})
       rules = MARKDOWN_IT_RULES.dup
