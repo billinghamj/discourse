@@ -147,6 +147,26 @@ RSpec.describe Service::Runner do
     end
   end
 
+  class FailureRescueService
+    include Service::Base
+
+    handle_exceptions { step :raising_step }
+
+    def raising_step
+      raise "BOOM"
+    end
+  end
+
+  class SuccessRescueService
+    include Service::Base
+
+    handle_exceptions { step :non_raising_step }
+
+    def non_raising_step
+      true
+    end
+  end
+
   describe ".call" do
     subject(:runner) { described_class.call(service, dependencies, &actions_block) }
 
@@ -425,6 +445,30 @@ RSpec.describe Service::Runner do
 
         it "does not run the provided block" do
           expect(runner).not_to eq :model_errors
+        end
+      end
+    end
+
+    context "when using the on_exceptions action" do
+      let(:actions) { <<-BLOCK }
+        proc do |result|
+          on_exceptions { |exception| exception.message == "BOOM" }
+        end
+      BLOCK
+
+      context "when the service fails" do
+        let(:service) { FailureRescueService }
+
+        it "runs the provided block" do
+          expect(runner).to be true
+        end
+      end
+
+      context "when the service does not fail" do
+        let(:service) { SuccessRescueService }
+
+        it "does not run the provided block" do
+          expect(runner).not_to eq true
         end
       end
     end

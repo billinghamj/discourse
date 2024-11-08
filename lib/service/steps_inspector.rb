@@ -10,7 +10,7 @@ class Service::StepsInspector
     attr_reader :step, :result, :nesting_level
 
     delegate :name, to: :step
-    delegate :failure?, :success?, :error, to: :step_result, allow_nil: true
+    delegate :failure?, :success?, :error, :raised_exception, to: :step_result, allow_nil: true
 
     def self.for(step, result, nesting_level: 0)
       class_name =
@@ -48,6 +48,7 @@ class Service::StepsInspector
     end
 
     def result_emoji
+      return "💥" if raised_exception
       return "❌" if failure?
       return "✅" if success?
       ""
@@ -103,9 +104,24 @@ class Service::StepsInspector
       nil
     end
   end
-  #
+
   # @!visibility private
   class Options < Step
+  end
+
+  # @!visibility private
+  class Rescue < Step
+    def steps
+      [self, *step.steps.map { Step.for(_1, result, nesting_level: nesting_level + 1).steps }]
+    end
+
+    def error
+      step_result.exception.inspect
+    end
+
+    def inspect_type
+      "handle_exceptions"
+    end
   end
 
   attr_reader :steps, :result
@@ -123,7 +139,12 @@ class Service::StepsInspector
   #   [4/4] [step] 'change_status'
   # @return [String] the steps of the result object with their state
   def inspect
-    steps.map.with_index { |step, index| "[#{index + 1}/#{steps.size}] #{step.inspect}" }.join("\n")
+    steps
+      .map
+      .with_index do |step, index|
+        "[#{format("%#{steps.size.to_s.size}s", index + 1)}/#{steps.size}] #{step.inspect}"
+      end
+      .join("\n")
   end
 
   # @return [String, nil] the first available error, if any.
