@@ -1,19 +1,18 @@
 # frozen_string_literal: true
 
+require "extralite"
+
 module Migrations::CLI
-  module ImportCommand
-    def self.included(thor)
-      thor.class_eval do
-        desc "import", "Import a file"
-        def import
-          ::Migrations.load_rails_environment
+  class ImportCommand
+    def initialize(options)
+      @options = options
+    end
 
-          require "extralite"
+    def execute
+      ::Migrations.load_rails_environment
 
-          puts "Importing into Discourse #{Discourse::VERSION::STRING}"
-          puts "Extralite SQLite version: #{Extralite.sqlite3_version}"
-        end
-      end
+      puts "Importing into Discourse #{Discourse::VERSION::STRING}"
+      puts "Extralite SQLite version: #{Extralite.sqlite3_version}"
     end
   end
 end
