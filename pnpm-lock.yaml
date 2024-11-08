@@ -33,7 +33,7 @@ importers:
         version: 7.25.9(@babel/core@7.26.0)
       '@discourse/lint-configs':
         specifier: github:discourse/lint-configs#flatten&path:/lint-configs
-        version: https://codeload.github.com/discourse/lint-configs/tar.gz/3fea9a0e9573b9fff7c98134a21623731605afae#path:/lint-configs(ember-template-lint@6.0.0)(eslint@9.14.0)(prettier@2.8.8)
+        version: https://codeload.github.com/discourse/lint-configs/tar.gz/13643ac1c6c8cdf40eb27e6075511213e1b4595d#path:/lint-configs(ember-template-lint@6.0.0)(eslint@9.14.0)(prettier@2.8.8)
       '@discourse/moment-timezone-names-translations':
         specifier: ^1.0.0
         version: 1.0.0
@@ -1836,8 +1836,8 @@ packages:
   '@discourse/itsatrap@2.0.10':
     resolution: {integrity: sha512-Jn1gdiyHMGUsmUfLFf4Q7VnTAv0l7NePbegU6pKhKHEmbzV3FosGxq30fTOYgVyTS1bxqGjlA6LvQttJpv3ROw==}
 
-  '@discourse/lint-configs@https://codeload.github.com/discourse/lint-configs/tar.gz/3fea9a0e9573b9fff7c98134a21623731605afae#path:/lint-configs':
-    resolution: {path: /lint-configs, tarball: https://codeload.github.com/discourse/lint-configs/tar.gz/3fea9a0e9573b9fff7c98134a21623731605afae}
+  '@discourse/lint-configs@https://codeload.github.com/discourse/lint-configs/tar.gz/13643ac1c6c8cdf40eb27e6075511213e1b4595d#path:/lint-configs':
+    resolution: {path: /lint-configs, tarball: https://codeload.github.com/discourse/lint-configs/tar.gz/13643ac1c6c8cdf40eb27e6075511213e1b4595d}
     version: 2.0.0
     peerDependencies:
       ember-template-lint: 6.0.0
@@ -9386,7 +9386,7 @@ snapshots:
 
   '@discourse/itsatrap@2.0.10': {}
 
-  '@discourse/lint-configs@https://codeload.github.com/discourse/lint-configs/tar.gz/3fea9a0e9573b9fff7c98134a21623731605afae#path:/lint-configs(ember-template-lint@6.0.0)(eslint@9.14.0)(prettier@2.8.8)':
+  '@discourse/lint-configs@https://codeload.github.com/discourse/lint-configs/tar.gz/13643ac1c6c8cdf40eb27e6075511213e1b4595d#path:/lint-configs(ember-template-lint@6.0.0)(eslint@9.14.0)(prettier@2.8.8)':
     dependencies:
       '@babel/core': 7.26.0(supports-color@8.1.1)
       '@babel/eslint-parser': 7.25.9(@babel/core@7.26.0)(eslint@9.14.0)
