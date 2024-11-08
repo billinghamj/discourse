@@ -1,5 +1,3 @@
-/* global PublicKeyCredential */
-
 import { ajax } from "discourse/lib/ajax";
 import I18n from "discourse-i18n";
 
