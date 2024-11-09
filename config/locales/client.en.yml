@@ -6623,6 +6623,8 @@ en:
         status: "Status"
         show_emails: "Show Emails"
         hide_emails: "Hide Emails"
+        bulk_actions: "Bulk actions"
+        delete: "Delete"
         nav:
           new: "New"
           active: "Active"

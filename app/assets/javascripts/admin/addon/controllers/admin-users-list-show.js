@@ -19,7 +19,9 @@ export default class AdminUsersListShowController extends Controller.extend(
   showEmails = false;
   refreshing = false;
   listFilter = null;
-  selectAll = false;
+  bulkSelect = false;
+  displayBulkActions = false;
+  bulkSelectedUsers = new Set();
 
   @i18n("search_hint") searchHint;
 
@@ -106,4 +108,26 @@ export default class AdminUsersListShowController extends Controller.extend(
       asc,
     });
   }
+
+  @action
+  toggleBulkSelect() {
+    this.toggleProperty("bulkSelect");
+    this.setProperties({
+      displayBulkActions: false,
+      bulkSelectedUsers: new Set(),
+    });
+  }
+
+  @action
+  bulkSelectItemToggle(userId, event) {
+    if (event.target.checked) {
+      this.bulkSelectedUsers.add(userId);
+    } else {
+      this.bulkSelectedUsers.delete(userId);
+    }
+    this.set("displayBulkActions", this.bulkSelectedUsers.size > 0);
+  }
+
+  @action
+  performBulkDelete() {}
 }
